@@ -21,6 +21,8 @@ class GameViewController: UIViewController {
     //MARK: - Properties
     
     var gameType: GameType?
+    var firstPlayerPositions = [GameboardPosition]()
+    var secondPlayerPositions = [GameboardPosition]()
     
     //MARK: - Private properties
     
@@ -29,6 +31,10 @@ class GameViewController: UIViewController {
     private var currentState: GameState! {
         didSet {
             currentState.begin()
+            
+            if currentState is ShowGameState {
+                showGame()
+            }
         }
     }
     
@@ -57,10 +63,17 @@ class GameViewController: UIViewController {
     //MARK: - Private functions
     
     private func goToNextState() {
-        if let winner = referee.determineWinner() {
+        if gameType != .multiTouchesGame, let winner = referee.determineWinner() {
             currentState = GameEndedState(winner: winner,
                                           gameViewController: self)
             return
+        } else {
+            if let multiTouchedState = self.currentState as? MultiTouchesState,
+               multiTouchedState.player == .second,
+               multiTouchedState.counter == 5 {
+                currentState = ShowGameState(gameViewController: self, gameboard: gameBoard, gameboardView: gameboardView, positions: firstPlayerPositions + secondPlayerPositions)
+                return
+            }
         }
         
         switch gameType {
@@ -86,6 +99,13 @@ class GameViewController: UIViewController {
             }
         case .none:
             break
+        case .multiTouchesGame:
+            if let multiTouchesState = currentState as? MultiTouchesState {
+                let player = multiTouchesState.player.next
+                currentState = MultiTouchesState(player: player,
+                                                 gameViewController: self,
+                                                 gameboard: gameBoard)
+            }
         }
     }
     
@@ -107,9 +127,26 @@ class GameViewController: UIViewController {
                                               markViewPrototype: player.markViewPrototype)
         case .none:
             break
+        case .multiTouchesGame:
+            currentState = MultiTouchesState(player: player,
+                                             gameViewController: self,
+                                             gameboard: gameBoard)
         }
+    }
+    
+    private func showGame() {
+        guard let showGameState = currentState as? ShowGameState,
+              showGameState.isCompleted == true else { return }
+        let sortedPositions = showGameState.positions
         
-        
+        for position in sortedPositions {
+                showGameState.addMark(at: position)
+            if let winner = referee.determineWinner() {
+                currentState = GameEndedState(winner: winner,
+                                              gameViewController: self)
+                return
+            }
+        }
     }
     
 }

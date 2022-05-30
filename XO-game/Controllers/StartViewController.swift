@@ -9,7 +9,7 @@
 import UIKit
 
 enum GameType {
-    case vsComputerGame, twoPlayersGame
+    case vsComputerGame, twoPlayersGame, multiTouchesGame
 }
 
 class StartViewController: UIViewController {
@@ -18,7 +18,7 @@ class StartViewController: UIViewController {
     
     @IBOutlet weak var vsComputerGameButton: UIButton!
     @IBOutlet weak var twoPlayersGameButton: UIButton!
-    
+    @IBOutlet weak var multiTouchesGameButton: UIButton!
     
     //MARK: - Lificycle
 
@@ -38,6 +38,12 @@ class StartViewController: UIViewController {
     @IBAction func twoPlayersGameButtonTapped(_ sender: Any) {
         guard let destination = getDestinationController() else { return }
         destination.gameType = .twoPlayersGame
+        self.present(destination, animated: true)
+    }
+    
+    @IBAction func multiTouchesGameButtonTapped(_ sender: Any) {
+        guard let destination = getDestinationController() else { return }
+        destination.gameType = .multiTouchesGame
         self.present(destination, animated: true)
     }
     

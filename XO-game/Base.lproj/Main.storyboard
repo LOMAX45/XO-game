@@ -45,19 +45,37 @@
                                     <action selector="twoPlayersGameButtonTapped:" destination="pYM-kp-wed" eventType="touchUpInside" id="vDX-Bz-dgK"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Llb-jX-Ekr">
+                                <rect key="frame" x="32" y="560.33333333333337" width="326" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="xjm-Ai-yV0"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Множественный выбор">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="19"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="multiTouchesGameButtonTapped:" destination="pYM-kp-wed" eventType="touchUpInside" id="xfT-cQ-fqW"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="pCm-Ht-0cN"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Llb-jX-Ekr" firstAttribute="leading" secondItem="pCm-Ht-0cN" secondAttribute="leading" constant="32" id="3ga-yv-Q2I"/>
                             <constraint firstItem="pCm-Ht-0cN" firstAttribute="trailing" secondItem="ZjS-WR-W9V" secondAttribute="trailing" constant="32" id="FF0-dW-F9y"/>
                             <constraint firstItem="pCm-Ht-0cN" firstAttribute="trailing" secondItem="CZc-60-0oJ" secondAttribute="trailing" constant="32" id="Gb7-ec-whj"/>
                             <constraint firstItem="CZc-60-0oJ" firstAttribute="centerY" secondItem="3Qt-JW-BjG" secondAttribute="centerY" multiplier="0.85" id="UZw-7b-KsD"/>
+                            <constraint firstItem="Llb-jX-Ekr" firstAttribute="top" secondItem="ZjS-WR-W9V" secondAttribute="bottom" constant="50" id="Weo-i4-Cb6"/>
+                            <constraint firstItem="pCm-Ht-0cN" firstAttribute="trailing" secondItem="Llb-jX-Ekr" secondAttribute="trailing" constant="32" id="pBc-6q-rej"/>
                             <constraint firstItem="ZjS-WR-W9V" firstAttribute="centerY" secondItem="3Qt-JW-BjG" secondAttribute="centerY" multiplier="1.15" id="qVC-bf-nxC"/>
                             <constraint firstItem="CZc-60-0oJ" firstAttribute="leading" secondItem="pCm-Ht-0cN" secondAttribute="leading" constant="32" id="uMe-1o-CHL"/>
                             <constraint firstItem="ZjS-WR-W9V" firstAttribute="leading" secondItem="pCm-Ht-0cN" secondAttribute="leading" constant="32" id="vUU-kD-agT"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="multiTouchesGameButton" destination="Llb-jX-Ekr" id="ChD-Fb-zEe"/>
                         <outlet property="twoPlayersGameButton" destination="ZjS-WR-W9V" id="Dkt-z9-t10"/>
                         <outlet property="vsComputerGameButton" destination="CZc-60-0oJ" id="U4Z-EN-B1w"/>
                     </connections>
