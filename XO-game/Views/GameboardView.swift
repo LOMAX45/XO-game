@@ -53,6 +53,15 @@ public class GameboardView: UIView {
         addSubview(markView)
     }
     
+    public func createRamdonPosition() -> GameboardPosition {
+        var position = GameboardPosition(column: 0, row: 0)
+            repeat {
+                position.column = Int.random(in: 0..<GameboardSize.columns)
+                position.row = Int.random(in: 0..<GameboardSize.rows)
+            } while !canPlaceMarkView(at: position)
+        return position
+    }
+    
     public func removeMarkView(at position: GameboardPosition) {
         guard let markView = markViewForPosition[position] else {
             return

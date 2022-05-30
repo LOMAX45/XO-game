@@ -10,6 +10,8 @@ import Foundation
 
 public struct GameboardPosition: Hashable {
     
-    public let column: Int
-    public let row: Int
+    //MARK: - Properties
+    
+    public var column: Int
+    public var row: Int
 }
